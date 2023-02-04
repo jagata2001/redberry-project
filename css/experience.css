@@ -18,6 +18,10 @@
 }
 .inputSide .inputFields .date input{
     padding: 0 16px;
+      color: #000000;
+}
+.inputSide .inputFields .date input:invalid::-webkit-datetime-edit{
+    color: rgba(0, 0, 0, 0.6);
 }
 .inputSide .inputFields .date input::-webkit-calendar-picker-indicator {
   color: rgba(0, 0, 0, 0);
