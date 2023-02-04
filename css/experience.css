@@ -1,0 +1,34 @@
+.inputSide .inputFields .position .inputComponent, .inputSide .inputFields .employer .inputComponent{
+  width: 798px;
+}
+.inputSide .inputFields .position{
+  margin-top: 69px;
+}
+
+.inputSide .inputFields .employer, .inputSide .inputFields .inlineTwoInput{
+  margin-top: 12px;
+}
+.inputSide .inputFields .description{
+  display: flex;
+  flex-direction: column;
+  margin-top: 25px;
+}
+.inputSide .inputFields .description textarea{
+  height: 123px;
+}
+.inputSide .inputFields .date input{
+    padding: 0 16px;
+}
+.inputSide .inputFields .date input::-webkit-calendar-picker-indicator {
+  color: rgba(0, 0, 0, 0);
+  opacity: 1;
+  display: block;
+  background: url('../images/dateIcon.png') no-repeat;
+  width: 24px;
+  height: 24px;
+  border-width: thin;
+}
+
+.inputSide .nextPreviousButtons{
+  margin-top: 111px;
+}

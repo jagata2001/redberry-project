@@ -66,13 +66,9 @@
   margin-top: 17px;
 }
 
-.inputSide .inputFields .email .inputComponent{
+.inputSide .inputFields .email .inputComponent, .inputSide .inputFields .phoneNumber .inputComponent{
   width: 798px;
 }
 .inputSide .inputFields .phoneNumber{
   margin-top: 13px;
-}
-
-.inputSide .inputFields .phoneNumber .inputComponent{
-  width: 798px;
 }

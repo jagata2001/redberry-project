@@ -172,8 +172,8 @@ body{
 }
 
 .inputSide .inputFields img[src$="/invalid.png"]{
-  width: 24px;
-  height: 24px;
+  width: 18px;
+  height: 18px;
   position: absolute;
   right: 0;
   transform: translateX(calc(100% + 12px));
@@ -245,10 +245,11 @@ body{
   margin: 0 75px 0px 80px;
   position: relative;
   border-bottom: 1px solid #C8C8C8;
+  margin-bottom: 24px;
 }
 
 .resume .resumeData .personalInfo .data{
-  /* css */
+  min-height: 250px;
 }
 
 .resume .resumeData .personalInfo .data .nameSurname{
@@ -298,8 +299,16 @@ body{
   line-height: 22px;
   color: #F93B1D;
 }
-
-.resume .resumeData .personalInfo .aboutMePlace p{
+.resume .resumeData h3{
+  font-family: 'Helvetica Neue Medium';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  margin-top: 15px;
+  color: #1A1A1A;
+}
+.resume .resumeData p{
   font-family: 'Helvetica Neue';
   font-style: normal;
   font-weight: 400;
@@ -322,4 +331,48 @@ body{
   width: 100%;
   height: 100%;
   border-radius: 50%;
+}
+
+.resume .resumeData h4{
+  font-family: 'Helvetica Neue Italic';
+  font-style: italic;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  margin-top: 7px;
+  color: #919191;
+}
+
+.resume .resumeData .experience{
+  padding-bottom: 20px;
+  margin: 0 75px 24px 80px;
+  border-bottom: 1px solid #C8C8C8;
+}
+
+.resume .resumeData .experience p{
+  width: 662px;
+  margin-top: 16px;
+}
+
+.inputSide .inputFields .line{
+  height: 1px;
+  background-color: #C1C1C1;
+  width: 798px;
+  margin-top: 50px;
+}
+
+.inputSide .inputFields .addMore{
+  border:none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 290px;
+  margin-top: 45px;
+  padding: 14px 21px;
+  font-family: 'Helvetica Neue Medium';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  color: #FFFFFF;
+  background-color: #62A1EB;
 }
