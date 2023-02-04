@@ -1,0 +1,325 @@
+body{
+  display: inline-flex;
+  height: 100vh;
+  background-color: #F9F9F9;
+  justify-content: center;
+  width: 100%;
+
+}
+
+.startPointButton{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #FFFFFF;
+  border: none;
+  cursor: pointer;
+  margin: 45px 0px 0px 48px;
+}
+.startPointButton img{
+  width: 9.21px;
+  height: 16px;
+}
+.resumeData, .inputFields{
+  padding-top: 47px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-bottom: 65px;
+}
+.inputSide{
+  margin-left: 38px;
+  width: 972px;
+  overflow: auto;
+}
+
+.inputSide .inputFields .header{
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 798px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #1A1A1A;
+}
+.inputSide .inputFields .header h1{
+  font-family: 'Helvetica Neue Bold';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  color: #1A1A1A;
+
+}
+.inputSide .inputFields .header p{
+  font-family: 'Helvetica Neue';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  color: #1A1A1A;
+  margin: 0;
+}
+.inputSide .inputFields .inlineTwoInput{
+  display: inline-flex;
+  align-items: center;
+  width: 100%;
+  margin-top: 69px;
+}
+.inputSide .inputFields .inlineTwoInput .separator{
+  width: 419px;
+  display: flex;
+  flex-direction: column;
+}
+.inputSide .inputFields .inlineTwoInput .separator:last-child{
+  margin-left: 8px;
+}
+
+.inputSide .inputFields .withOneInput{
+  display: flex;
+  flex-direction: column;
+}
+
+.inputSide .inputFields .withTextArea textarea{
+  border-radius: 4px;
+  background-color: #FFFFFF;
+  font-family: 'Helvetica Neue';
+  border: 1px solid #BCBCBC;
+  height: 103px;
+  margin-bottom: 8px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 21px;
+  padding: 13px 16px;
+  width: 798px;
+  color: rgba(0, 0, 0, 0.6);
+  resize: none;
+}
+
+.inputSide .inputFields .withTextArea .valid{
+  border: 1px solid #98E37E;
+}
+
+.inputSide .inputFields .withTextArea .invalid{
+  border: 1px solid #EF5050;
+}
+
+.inputSide .inputFields .withTextArea textarea:active, .inputSide .inputFields .withTextArea textarea:focus{
+  color: #000000;
+  border: 2px solid #BCBCBC;
+}
+
+.inputSide .inputFields label{
+  color: #000000;
+  font-family: 'Helvetica Neue Medium';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 21px;
+  margin-bottom: 8px;
+  margin-top: 8px;
+}
+
+.inputSide .inputFields .invalidLabel{
+  color: #E52F2F;
+}
+
+.inputSide .inputFields .inputComponent{
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: 371px;
+}
+
+.inputSide .inputFields .inputComponent input{
+  border: none;
+  border-radius: 4px;
+  background-color: #FFFFFF;
+  font-family: 'Helvetica Neue';
+  border: 1px solid #BCBCBC;
+  height: 48px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 21px;
+  padding-left: 16px;
+  padding-right: 22%;
+  width: 100%;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.inputSide .inputFields .inputComponent .valid{
+  border: 1px solid #98E37E;
+}
+
+.inputSide .inputFields .inputComponent .invalid{
+  border: 1px solid #EF5050;
+}
+
+.inputSide .inputFields .inputComponent input:active, .inputSide .inputFields .inputComponent input:focus{
+  color: #000000;
+  border: 2px solid #BCBCBC;
+}
+
+.inputSide .inputFields img[src$="/valid.png"]{
+  width: 18px;
+  height: 18px;
+  position: absolute;
+  right: 0;
+  margin-right: 15px;
+  display: none;
+}
+
+.inputSide .inputFields img[src$="/invalid.png"]{
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  right: 0;
+  transform: translateX(calc(100% + 12px));
+  display: none;
+
+}
+
+.inputSide p{
+  font-family: 'Helvetica Light';
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 21px;
+  color: #2E2E2E;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+.inputSide .nextPreviousButtons{
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  width: 798px;
+  self-align: end;
+}
+.inputSide .nextPreviousButtons button{
+  font-family: 'Helvetica Neue Medium';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0.08em;
+  color: #FFFFFF;
+  background-color: #6B40E3;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 14px 35px;
+}
+.inputSide .nextPreviousButtons .next{
+  margin-left: auto;
+}
+
+.inputSide .nextPreviousButtons .finish{
+  padding: 14px 19.5px !important;
+}
+
+
+.resume{
+  background-color: #FFFFFF;
+  width: 822px;
+  overflow: auto;
+}
+
+.resume .resumeData{
+  padding-top:48px;
+  padding-bottom: 44px;
+}
+
+.resume .resumeData .resumeLogo{
+  width: 42px;
+  height: 42px;
+  margin: auto auto 0 78px;
+}
+
+.resume .resumeData .personalInfo{
+  display: flex;
+  padding-bottom: 20px;
+  margin: 0 75px 0px 80px;
+  position: relative;
+  border-bottom: 1px solid #C8C8C8;
+}
+
+.resume .resumeData .personalInfo .data{
+  /* css */
+}
+
+.resume .resumeData .personalInfo .data .nameSurname{
+  display: flex;
+}
+.resume .resumeData .personalInfo .data .nameSurname h1{
+  font-family: 'Helvetica Neue Bold';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 34px;
+  line-height: 42px;
+  color: #F93B1D;
+  margin-top: 20px;
+  margin-bottom: 11px
+}
+.resume .resumeData .personalInfo .data .nameSurname h1:first-child{
+  margin-right: 20px;
+}
+
+.resume .resumeData .personalInfo .data .contactData{
+  display: flex;
+  align-items: center;
+  margin-top: 9px;
+}
+
+.resume .resumeData .personalInfo .data .contactData a{
+  text-decoration: none;
+  font-family: 'Helvetica Neue';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 21px;
+  color: #1A1A1A;
+  margin-left: 10px;
+}
+
+.resume .resumeData .personalInfo .data .aboutMePlace{
+  margin-top: 34px;
+  width: 432px;
+}
+
+.resume .resumeData h2{
+  font-family: 'Helvetica Neue Bold';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  color: #F93B1D;
+}
+
+.resume .resumeData .personalInfo .aboutMePlace p{
+  font-family: 'Helvetica Neue';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  color: #000000;
+  word-break: break-word;
+  margin-top: 15px;
+}
+
+.resume .resumeData .personalInfo .ImageSection{
+  width: 246px;
+  height: 246px;
+  position: absolute;
+  margin-left: 421px;
+  top: 0;
+}
+
+.resume .resumeData .personalInfo .ImageSection img{
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}

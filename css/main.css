@@ -1,0 +1,78 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+input:focus, textarea:focus{
+  outline: none;
+}
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url('../fonts/HelveticaNeue-01.ttf');
+}
+
+@font-face {
+  font-family: 'Helvetica Neue Bold';
+  src: url('../fonts/HelveticaNeue-Bold-02.ttf');
+}
+
+@font-face {
+  font-family: 'Helvetica Neue Bold Italic';
+  src: url('../fonts/HelveticaNeue-BoldItalic-04.ttf');
+}
+
+@font-face {
+  font-family: 'Helvetica Neue Light Italic';
+  src: url('../fonts/HelveticaNeue-LightItalic-09.ttf');
+}
+
+@font-face {
+  font-family: 'Helvetica Neue Medium';
+  src: url('../fonts/HelveticaNeue-Medium-11.ttf');
+}
+
+@font-face {
+  font-family: 'Helvetica Neue Medium Italic';
+  src: url('../fonts/HelveticaNeue-MediumItalic-12.ttf');
+}
+
+@font-face {
+  font-family: 'Helvetica Neue Condensed Black';
+  src: url('../fonts/HelveticaNeue-CondensedBlack-10.ttf');
+}
+
+@font-face {
+  font-family: 'Helvetica Neue Thin';
+  src: url('../fonts/HelveticaNeue-Thin-13.ttf');
+}
+
+@font-face {
+  font-family: 'Helvetica Neue Condensed Bold';
+  src: url('../fonts/HelveticaNeue-CondensedBold-05.ttf');
+}
+
+@font-face {
+  font-family: 'Helvetica Neue Thin Italic';
+  src: url('../fonts/HelveticaNeue-ThinItalic-14.ttf');
+}
+
+@font-face {
+  font-family: 'Helvetica Neue Italic';
+  src: url('../fonts/HelveticaNeue-Italic-03.ttf');
+}
+
+@font-face {
+  font-family: 'Helvetica Ultra Light';
+  src: url('../fonts/HelveticaNeue-UltraLight-06.ttf');
+}
+
+@font-face {
+  font-family: 'Helvetica Light';
+  src: url('../fonts/HelveticaNeue-Light-08.ttf');
+}
+
+@font-face {
+  font-family: 'Helvetica Ultra Light Italic';
+  src: url('../fonts/HelveticaNeue-UltraLightItalic-07.ttf');
+}

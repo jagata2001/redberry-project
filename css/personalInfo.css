@@ -1,0 +1,78 @@
+.inputSide .inputFields .uploadPersonalImage{
+  display: flex;
+  margin-top: 43px;
+  align-items: center;
+}
+
+.inputSide .inputFields .uploadPersonalImage .uploadImage{
+  position: relative;
+  overflow: hidden;
+  margin-left: 19px;
+}
+.inputSide .inputFields .uploadPersonalImage .uploadImage input{
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  top:0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+
+
+}
+.inputSide .inputFields .uploadPersonalImage .uploadImage  button{
+  font-family: 'Helvetica Neue';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: #FFFFFF;
+  height: 27px;
+  padding: 0 19px;
+  border: none;
+  cursor: pointer;
+  background-color: #0E80BF;
+  border-radius: 4px;
+
+}
+
+.inputSide .inputFields .uploadPersonalImage img[src$="/valid.png"]{
+  width: 18px;
+  height: 18px;
+  margin-left: 12px;
+  transform: none;
+  position: unset;
+  display: block;
+}
+.inputSide .inputFields .uploadPersonalImage img[src$="/invalid.png"]{
+  width: 24px;
+  height: 24px;
+  margin-left: 12px;
+  transform: none;
+  position: unset;
+  display: block;
+}
+.inputSide .inputFields .uploadPersonalImage label{
+  margin: 0;
+}
+
+.inputSide .inputFields .aboutMe{
+  display: flex;
+  flex-direction: column;
+  margin-top:41px;
+}
+
+.inputSide .inputFields .email{
+  margin-top: 17px;
+}
+
+.inputSide .inputFields .email .inputComponent{
+  width: 798px;
+}
+.inputSide .inputFields .phoneNumber{
+  margin-top: 13px;
+}
+
+.inputSide .inputFields .phoneNumber .inputComponent{
+  width: 798px;
+}

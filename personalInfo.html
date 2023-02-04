@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <title>RedBerry - პერსონალური ინფორმაცია</title>
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/addResume.css">
+    <link rel="stylesheet" href="./css/personalInfo.css">
+  </head>
+  <body>
+    <button type="button" name="button" class="startPointButton">
+      <img src="./images/leftArrow.png" alt="Left arrow icon">
+    </button>
+    <div class="inputSide">
+      <div class="inputFields">
+        <div class="header">
+          <h1>ᲞᲘᲠᲐᲓᲘ ᲘᲜᲤᲝ</h1>
+          <p>1/3</p>
+        </div>
+        <div class="inlineTwoInput">
+          <div class="separator">
+            <label>სახელი</label>
+            <div class="inputComponent">
+              <input type="text" autocomplete="off" class="valid" id="name" value="">
+              <img src="./images/valid.png" alt="Valid">
+            </div>
+            <p>მინიმუმ 2 ასო, ქართული ასოები</p>
+          </div>
+          <div class="separator">
+            <label class="invalidLabel">გვარი</label>
+            <div class="inputComponent">
+              <input type="text" autocomplete="off" class="invalid" id="surname" value="">
+              <img src="./images/invalid.png" alt="Valid">
+            </div>
+            <p>მინიმუმ 2 ასო, ქართული ასოები</p>
+          </div>
+        </div>
+        <div class="uploadPersonalImage">
+          <label>პირადი ფოტოს ატვირთვა</label>
+          <div class="uploadImage">
+            <button type="button" name="button">ატვირთვა</button>
+            <input type="file" id="personalImage" value="">
+          </div>
+          <img src="./images/valid.png" alt="Valid">
+        </div>
+        <div class="withTextArea aboutMe">
+          <label for="aboutMe">ჩემ შესახებ (არასავალდებულო)</label>
+          <textarea id="aboutMe" rows="8" cols="80"></textarea>
+        </div>
+        <div class="withOneInput email">
+          <label>ელ.ფოსტა</label>
+          <div class="inputComponent">
+            <input type="text" autocomplete="off" id="email" value="">
+            <img src="./images/valid.png" alt="Valid">
+          </div>
+          <p>უნდა მთავრდებოდეს @redberry.ge-ით</p>
+        </div>
+        <div class="withOneInput phoneNumber">
+          <label>მობილურის ნომერი</label>
+          <div class="inputComponent">
+            <input type="text" autocomplete="off" id="phoneNumber" value="">
+            <img src="./images/valid.png" alt="Valid">
+          </div>
+          <p>უნდა აკმაყოფილებდეს ქართული მობილურის ნომრის ფორმატს</p>
+        </div>
+        <div class="nextPreviousButtons">
+          <button type="button" class="next">შემდეგი</button>
+        </div>
+      </div>
+    </div>
+    <div class="resume">
+      <div class="resumeData">
+        <section class="personalInfo">
+          <div class="data">
+            <div class="nameSurname">
+              <h1>ანზორ</h1>
+              <h1>მუმლაძე</h1>
+            </div>
+            <div class="contactData">
+              <img src="./images/email.png" alt="Email icon">
+              <a href="#">anzor666@gmail.com</a>
+            </div>
+            <div class="contactData">
+              <img src="./images/phone.png" alt="Phone icon">
+              <a href="#">+995 597 63 45 16</a>
+            </div>
+            <div class="aboutMePlace">
+              <h2>ᲩᲔᲛ ᲨᲔᲡᲐᲮᲔᲑ</h2>
+              <p>ძალიან მიყვარს დიზაინის კეთება. დილით ადრე რომ ავდგები გამამხნევებელი ვარჯიშების მაგიერ დიზაინს ვაკეთებ.</p>
+            </div>
+          </div>
+          <div class="ImageSection">
+            <img src="https://www.pngitem.com/pimgs/m/208-2080024_man-in-suit-running-hd-png-download.png" alt="Profile image">
+          </div>
+        </section>
+        <img src="./images/resumeLogo.png" class="resumeLogo" alt="Resume logo">
+      </div>
+    </div>
+  </body>
+</html>
