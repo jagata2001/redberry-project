@@ -22,16 +22,17 @@
           <div class="separator">
             <label>სახელი</label>
             <div class="inputComponent">
-              <input type="text" autocomplete="off" class="valid" id="name" placeholder="ანზორ" value="">
+              <input type="text" autocomplete="off" id="name" placeholder="ანზორ" value="">
               <img src="./images/valid.png" alt="Valid">
             </div>
             <p>მინიმუმ 2 ასო, ქართული ასოები</p>
           </div>
           <div class="separator">
-            <label class="invalidLabel">გვარი</label>
+            <label>გვარი</label>
+            <!--  class="invalidLabel" -->
             <div class="inputComponent">
-              <input type="text" autocomplete="off" class="invalid" id="surname" placeholder="მუმლაძე" value="">
-              <img src="./images/invalid.png" alt="Valid">
+              <input type="text" autocomplete="off" id="surname" placeholder="მუმლაძე" value="">
+              <img src="./images/invalid.png" alt="Invalid">
             </div>
             <p>მინიმუმ 2 ასო, ქართული ასოები</p>
           </div>
@@ -40,7 +41,7 @@
           <label>პირადი ფოტოს ატვირთვა</label>
           <div class="uploadImage">
             <button type="button" name="button">ატვირთვა</button>
-            <input type="file" id="personalImage" value="">
+            <input type="file" id="personalImage" accept="Image/*" value="">
           </div>
           <img src="./images/valid.png" alt="Valid">
         </div>
@@ -71,31 +72,37 @@
     </div>
     <div class="resume">
       <div class="resumeData">
-        <section class="personalInfo">
+        <section class="personalInfo" id="personalInfo">
           <div class="data">
             <div class="nameSurname">
-              <h1>ანზორ</h1>
-              <h1>მუმლაძე</h1>
+              <h1 id="nameOutput"></h1>
+              <h1 id="surnameOutput"></h1>
             </div>
             <div class="contactData">
               <img src="./images/email.png" alt="Email icon">
-              <a href="#">anzor666@gmail.com</a>
+              <a href="#" id="emailOutput"></a>
             </div>
             <div class="contactData">
               <img src="./images/phone.png" alt="Phone icon">
-              <a href="#">+995 597 63 45 16</a>
+              <a href="#" id="phoneNumberOutput"></a>
             </div>
             <div class="aboutMePlace">
               <h2>ᲩᲔᲛ ᲨᲔᲡᲐᲮᲔᲑ</h2>
-              <p>ძალიან მიყვარს დიზაინის კეთება. დილით ადრე რომ ავდგები გამამხნევებელი ვარჯიშების მაგიერ დიზაინს ვაკეთებ.</p>
+              <p id="aboutMeOutput"></p>
             </div>
           </div>
           <div class="ImageSection">
-            <img src="https://www.pngitem.com/pimgs/m/208-2080024_man-in-suit-running-hd-png-download.png" alt="Profile image">
+            <img id="personalImageOutput" src="" alt="Profile image">
           </div>
         </section>
         <img src="./images/resumeLogo.png" class="resumeLogo" alt="Resume logo">
       </div>
     </div>
+
+    <!-- scripts -->
+    <script src="./scripts/functions.js"></script>
+    <script src="./scripts/main.js"></script>
+    <script src="./scripts/personalInfo.js"></script>
+    <!-- End of scripts -->
   </body>
 </html>

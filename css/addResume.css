@@ -263,6 +263,7 @@ body{
 
 .resume .resumeData .personalInfo .data .nameSurname{
   display: flex;
+  min-height: 73px;
 }
 .resume .resumeData .personalInfo .data .nameSurname h1{
   font-family: 'Helvetica Neue Bold';
@@ -282,6 +283,8 @@ body{
   display: flex;
   align-items: center;
   margin-top: 9px;
+  min-height: 21px;
+  visibility: hidden;
 }
 
 .resume .resumeData .personalInfo .data .contactData a{
@@ -298,6 +301,7 @@ body{
 .resume .resumeData .personalInfo .data .aboutMePlace{
   margin-top: 34px;
   width: 432px;
+  visibility: hidden;
 }
 
 .resume .resumeData h2{
@@ -334,6 +338,7 @@ body{
   position: absolute;
   margin-left: 421px;
   top: 0;
+  visibility: hidden;
 }
 
 .resume .resumeData .personalInfo .ImageSection img{

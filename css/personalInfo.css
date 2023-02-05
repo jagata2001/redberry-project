@@ -42,11 +42,11 @@
   margin-left: 12px;
   transform: none;
   position: unset;
-  display: block;
+  display: none;
 }
 .inputSide .inputFields .uploadPersonalImage img[src$="/invalid.png"]{
-  width: 24px;
-  height: 24px;
+  width: 18px;
+  height: 18px;
   margin-left: 12px;
   transform: none;
   position: unset;
