@@ -63,3 +63,7 @@
 .inputSide .inputFields .options h3:hover{
   background-color: #C3DCEE;
 }
+
+.inputSide .inputFields .withTextArea textarea{
+  height: 180px;
+}

@@ -32,7 +32,8 @@ const validators = {
   "email":validateEmail,
   "phoneNumber":validatePhoneNumber,
   "position":validateLength,
-  "employer":validateLength
+  "employer":validateLength,
+  "school":validateLength
 };
 
 const getPageIdBasedOnUrl = ()=>{
@@ -64,6 +65,16 @@ const updateOutputAndValidate = (target)=>{
     updateTextWithSeparator(
           target.id === "position" ? value :  second.value,
           target.id === "employer" ? value : second.value,
+          target.getAttribute("data-outputcontainerid"),
+          "h3",//destinationTag
+          ", "
+       );
+  }else if(target.id === "school") {
+    const inputsContainerId = target.getAttribute("data-outputcontainerid").replace("Out","");
+    const degree = document.querySelector(`#${inputsContainerId} #degree span`);
+    updateTextWithSeparator(
+          target.value,
+          degree.innerText === "აირჩიეთ ხარისხი" ? "" : degree.innerText,
           target.getAttribute("data-outputcontainerid"),
           "h3",//destinationTag
           ", "
@@ -130,8 +141,8 @@ const validateDateTypeInputAndUpdate = (target,compare=false)=>{
     const secondId = target.id === "startDate" ? "endDate" : "startDate";
     const second = document.querySelector(`#${inputsContainerId} #${secondId}`);
     updateTextWithSeparator(
-          target.id === "startDate" ? target.value.replaceAll("-","/") : second.value.replaceAll("-","/"),
-          target.id === "endDate" ? target.value.replaceAll("-","/") : second.value.replaceAll("-","/"),
+          target.id === "startDate" ? target.value : second.value,
+          target.id === "endDate" ? target.value : second.value,
           target.getAttribute("data-outputcontainerid"),
           "h4",//destinationTag
           " - "
@@ -153,13 +164,15 @@ const validateDateTypeInputAndUpdate = (target,compare=false)=>{
       }
       return;
     }
-    if(target.value === ""){
-      target.classList = [];
-      target.classList.add("invalid");
-    }else{
-      target.classList = [];
-      target.classList.add("valid");
-    }
+  }
+  if(!compare)
+    updateTextWithSeparator(target.value,"",target.getAttribute("data-outputcontainerid"),"h4"," - ");
+  if(target.value === ""){
+    target.classList = [];
+    target.classList.add("invalid");
+  }else{
+    target.classList = [];
+    target.classList.add("valid");
   }
 };
 const validateTextareaAndUpdate = (target)=>{
@@ -175,7 +188,7 @@ const validateTextareaAndUpdate = (target)=>{
     target.classList.add("valid");
   }
 };
-const positionEmployerEducationDateFunction = (pageId,e)=>{
+const positionEmployerEducationDateFunction = (pageId,headText,e)=>{
   const data = getDataFromLocalStorage();
   const target = e.currentTarget;
   const outputContainerId = e.currentTarget.getAttribute("data-outputContainerId");
@@ -183,14 +196,14 @@ const positionEmployerEducationDateFunction = (pageId,e)=>{
   let outputContainer = document.querySelector(`#${outputContainerId}`);
   if(data["data"][pageId][inputsContainerId] === undefined) data["data"][pageId][inputsContainerId] = {};
   if(target.value !== "" && outputContainer === null){
-    createSectionForEducationOrExperience(outputContainerId,"ᲒᲐᲛᲝᲪᲓᲘᲚᲔᲑᲐ");
+    createSectionForEducationOrExperience(outputContainerId,headText);
     outputContainer = document.querySelector(`#${outputContainerId}`);
   }
 
   if(target.type === "text"){
     updateOutputAndValidate(target);
   }else if(target.type === "date") {
-    validateDateTypeInputAndUpdate(target,true)
+    target.id === "schoolEndDate" ? validateDateTypeInputAndUpdate(target) : validateDateTypeInputAndUpdate(target,true)
   }else{
     validateTextareaAndUpdate(target);
   }
@@ -333,15 +346,149 @@ const createNewExperience = ()=>{
   experienceForms[experienceForms.length - 1].after(div);
   return newId;
 };
+const createOptions = ()=>{
+  const div = document.createElement("div");
+  div.className = "options";
+  div.id = "options";
+  const defaultOption = document.createElement("h3");
+  defaultOption.innerText = "აირჩიეთ ხარისხი";
+  div.appendChild(defaultOption);
+  for(const option of options){
+    const h3 = document.createElement("h3");
+    h3.innerText = option["title"];
+    div.appendChild(h3);
+  }
+  return div;
+};
+const createNewEducation = ()=>{
+  const educationForms = document.querySelectorAll("div[id^='education']");
+  const lastId = parseInt(educationForms[educationForms.length-1].id.split("-")[1]);
+  const newId = `education-${lastId+1}`;
+  const outputContainerId = `educationOut-${lastId+1}`;
 
-const experienceFormEventListenerSetUp = (pageId, formId)=>{
-  const form = formId == undefined ? document : document.querySelector(`#${formId}`);
+  const div = document.createElement("div");
+  div.id = newId;
+
+  const schoolDiv = document.createElement("div");
+  schoolDiv.className = "withOneInput position";
+  const schoolLabel = document.createElement("label");
+  schoolLabel.setAttribute("for","school");
+  schoolLabel.innerText = "სასწავლებელი";
+  schoolDiv.appendChild(schoolLabel);
+  schoolDiv.appendChild(
+    createInputComponent(
+      "school",
+      "სასწავლებელი",
+      outputContainerId
+    )
+  );
+  const schoolP = document.createElement("p");
+  schoolP.innerText = "მინიმუმ 2 სიმბოლო";
+  schoolDiv.appendChild(schoolP);
+  div.appendChild(schoolDiv);
+
+  const inlineTwoInputDiv = document.createElement("div");
+  inlineTwoInputDiv.className = "inlineTwoInput";
+
+  const separatorDiv = document.createElement("div");
+  separatorDiv.className = "separator";
+  const label = document.createElement("label");
+  label.innerText = "ხარისხი";
+  label.setAttribute("for","degree");
+  separatorDiv.appendChild(label);
+  const componentDiv = document.createElement("div");
+  componentDiv.className = "inputComponent date";
+  const button = document.createElement("button");
+  button.id = "degree";
+  button.className = "container";
+  button.setAttribute("data-outputcontainerid",outputContainerId);
+  const span = document.createElement("span");
+  span.innerText = "აირჩიეთ ხარისხი";
+  button.appendChild(span);
+  const img = document.createElement("img");
+  img.src = "./images/downArrow.png";
+  img.setAttribute("alt", "Down arrow");
+  button.appendChild(img);
+  componentDiv.append(button);
+  componentDiv.append(createOptions());
+  separatorDiv.append(componentDiv);
+  inlineTwoInputDiv.appendChild(separatorDiv);
+
+  inlineTwoInputDiv.appendChild(
+    createSeparatorDiv(
+      "schoolEndDate",
+      "დამთავრების რიცხვი",
+      outputContainerId
+    )
+  );
+  div.appendChild(inlineTwoInputDiv);
+  div.appendChild(
+    createDescriptionDiv(
+      "description",
+      "განათლების აღწერა",
+      outputContainerId
+    )
+  );
+  const lineDiv = document.createElement("div");
+  lineDiv.className = "line";
+  div.appendChild(lineDiv);
+  educationForms[educationForms.length - 1].after(div);
+  return newId;
+};
+
+const chooseOption = (pageId,headText,e)=>{
+  const data = getDataFromLocalStorage();
+  const target = e.currentTarget;
+  const degree = target.parentElement.parentElement.querySelector("#degree");
+  const outputContainerId = degree.getAttribute("data-outputContainerId");
+  const inputsContainerId = outputContainerId.replace("Out","");
+
+  if(data["data"][pageId][inputsContainerId] === undefined) data["data"][pageId][inputsContainerId] = {};
+  data["data"][pageId][inputsContainerId]["degree"] = target.innerText;
+  const span = degree.querySelector("span");
+  span.style.color = "#000000";
+  span.innerText = target.innerText;
+
+  degree.classList.add("valid");
+  if(target.innerText === "აირჩიეთ ხარისხი"){
+    delete data["data"][pageId][inputsContainerId]["degree"];
+    degree.classList.remove("valid");
+    span.style.color = "";
+  }
+  const outputContainer = document.querySelector(`#${outputContainerId}`);
+  if(outputContainer === null){
+    createSectionForEducationOrExperience(outputContainerId,headText);
+  }
+  target.parentElement.style.display = "";
+
+  const school = document.querySelector(`#${inputsContainerId} #school`);
+  updateTextWithSeparator(
+        school.value,
+        target.innerText,
+        outputContainerId,
+        "h3",//destinationTag
+        ", "
+     );
+  setDataInLocalStorage(data);
+};
+const experienceEducationFormEventListenerSetUp = (pageId, headText, formId)=>{
+  const form = formId === undefined ? document : document.querySelector(`#${formId}`);
   const inputs = form.querySelectorAll("input[type='text']");
   const dateInputs = form.querySelectorAll("input[type='date']");
   const description = form.querySelector("#description");
-  for(const input of inputs) input.addEventListener("keyup", positionEmployerEducationDateFunction.bind(event,pageId));
-  for(const dateInput of dateInputs) dateInput.addEventListener("change", positionEmployerEducationDateFunction.bind(event,pageId));
-  description.addEventListener("keyup", positionEmployerEducationDateFunction.bind(event,pageId));
+  for(const input of inputs) input.addEventListener("keyup", positionEmployerEducationDateFunction.bind(event,pageId,headText));
+  for(const dateInput of dateInputs) dateInput.addEventListener("change", positionEmployerEducationDateFunction.bind(event,pageId,headText));
+  description.addEventListener("keyup", positionEmployerEducationDateFunction.bind(event,pageId,headText));
+
+  if(headText === "ᲒᲐᲜᲐᲗᲚᲔᲑᲐ"){
+    const degree = form.querySelector("#degree");
+    const options = form.querySelectorAll("#options h3");
+    for(const option of options) option.addEventListener("click", chooseOption.bind(event,pageId,headText));
+    degree.addEventListener("click",(e)=>{
+      const options = e.currentTarget.parentElement.querySelector("#options");
+      options.style.display = options.style.display === "block" ? "" : "block";
+    });
+  }
 };
 const restorePersonalInfo = ()=>{
   const data = getDataFromLocalStorage();
@@ -376,6 +523,10 @@ const restoreExperienceInfo = ()=>{
   for(const [inputsContainerId, inputsData] of Object.entries(data["data"]["experience"])){
 
     const outputContainerId = inputsContainerId.replace("-","Out-");
+    if(inputsContainerId !== "experience-0" && pageId === "experience"){
+      const formId = createNewExperience();
+      experienceEducationFormEventListenerSetUp(pageId, "ᲒᲐᲛᲝᲪᲓᲘᲚᲔᲑᲐ", formId);
+    }
     if(Object.keys(inputsData).length === 0) continue;
 
     createSectionForEducationOrExperience(outputContainerId,"ᲒᲐᲛᲝᲪᲓᲘᲚᲔᲑᲐ");
@@ -405,10 +556,6 @@ const restoreExperienceInfo = ()=>{
     descriptionDestination.innerText = description;
 
     if(pageId === "experience"){
-      if(inputsContainerId !== "experience-0"){
-        const formId = createNewExperience();
-        experienceFormEventListenerSetUp(pageId, formId);
-      }
       for(const [elementKey, value] of Object.entries(inputsData)){
           const input = document.querySelector(`#${inputsContainerId} #${elementKey}`);
           input.value = value;
@@ -423,7 +570,80 @@ const restoreExperienceInfo = ()=>{
     }
   }
 };
-const restoreDataFromLocalStorage = ()=>{
+
+const restoreEducationInfo = ()=>{
+  const data = getDataFromLocalStorage();
+  const pageId = getPageIdBasedOnUrl();
+  for(const [inputsContainerId, inputsData] of Object.entries(data["data"]["education"])){
+    const outputContainerId = inputsContainerId.replace("-","Out-");
+    if(inputsContainerId !== "education-0" && pageId === "education"){
+      const formId = createNewEducation();
+      experienceEducationFormEventListenerSetUp(pageId, "ᲒᲐᲜᲐᲗᲚᲔᲑᲐ", formId);
+    }
+    if(Object.keys(inputsData).length === 0) continue;
+
+    createSectionForEducationOrExperience(outputContainerId,"ᲒᲐᲜᲐᲗᲚᲔᲑᲐ");
+
+    const school = inputsData["school"] === undefined ? "" : inputsData["school"];
+    const degree = inputsData["degree"] === undefined ? "" : inputsData["degree"];
+    const schoolEndDate = inputsData["schoolEndDate"] === undefined ? "" : inputsData["schoolEndDate"];
+    const description = inputsData["description"] === undefined ? "" : inputsData["description"];
+
+    updateTextWithSeparator(
+          school,
+          degree,
+          outputContainerId,
+          "h3",//destinationTag
+          ", "
+       );
+    updateTextWithSeparator(
+          schoolEndDate,
+          "",
+          outputContainerId,
+          "h4",//destinationTag
+          ""
+       );
+    const descriptionDestination = document.querySelector(`#${outputContainerId} p`);
+    descriptionDestination.innerText = description;
+
+    if(pageId === "education"){
+      for(const [elementKey, value] of Object.entries(inputsData)){
+          if(elementKey === "degree"){
+            const span = document.querySelector(`#${inputsContainerId} #${elementKey} span`);
+            span.innerText = value;
+            span.parentElement.style.color = "#000000";
+            span.parentElement.classList.add("valid");
+            continue;
+          }
+
+          const input = document.querySelector(`#${inputsContainerId} #${elementKey}`);
+          input.value = value;
+          if(input.type === "text"){
+            updateOutputAndValidate(input);
+          }else if(input.type === "date") {
+            validateDateTypeInputAndUpdate(input)
+          }else{
+            validateTextareaAndUpdate(input);
+          }
+      }
+    }
+  }
+};
+let i = 0;
+const restoreDataFromLocalStorage = (waitForOptions = true)=>{
   restorePersonalInfo();
   restoreExperienceInfo();
+  const pageId = getPageIdBasedOnUrl();
+    if(pageId === "education"){
+    const checkIfOptionsLoaded = setInterval((e)=>{
+      if(options.length>0){
+        const addMore = document.querySelector("#addMore");
+        addMore.disabled = false;
+        restoreEducationInfo();
+        clearInterval(checkIfOptionsLoaded);
+      }
+    },200);
+    return;
+  }
+  restoreEducationInfo();
 };

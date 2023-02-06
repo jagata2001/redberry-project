@@ -19,93 +19,39 @@
           <h1>ᲒᲐᲜᲐᲗᲚᲔᲑᲐ</h1>
           <p>3/3</p>
         </div>
-        <div>
+        <div id="education-0">
           <div class="withOneInput position">
-            <label>სასწავლებელი</label>
+            <label for="school">სასწავლებელი</label>
             <div class="inputComponent">
-              <input type="text" autocomplete="off" id="school" placeholder="სასწავლებელი" value="">
+              <input type="text" autocomplete="off" id="school" data-outputContainerId="educationOut-0" placeholder="სასწავლებელი" value="">
               <img src="./images/valid.png" alt="Valid">
             </div>
             <p>მინიმუმ 2 სიმბოლო</p>
           </div>
           <div class="inlineTwoInput">
             <div class="separator">
-              <label>ხარისხი</label>
+              <label for="degree">ხარისხი</label>
               <div class="inputComponent">
-                <button class="container">
-                  აირჩიეთ ხარისხი
+                <button id="degree" class="container" data-outputContainerId="educationOut-0">
+                  <span>აირჩიეთ ხარისხი</span>
                   <img src="./images/downArrow.png" alt="Down arrow">
                 </button>
-                <div class="options">
-                  <h3>საშუალო სკოლის დიპლომი</h3>
-                  <h3>ზოგადსაგანმანათლებლო დიპლომი</h3>
-                  <h3>ბაკალავრი</h3>
-                  <h3>მაგისტრი</h3>
-                  <h3>დოქტორი</h3>
-                  <h3>ასოცირებული ხარისხი</h3>
-                  <h3>სტუდენტი</h3>
-                  <h3>კოლეჯი (ხარისხის გარეშე)</h3>
-                  <h3>სხვა</h3>
-                </div>
               </div>
             </div>
             <div class="separator">
-              <label>დამთავრების რიცხვი</label>
+              <label for="endDate">დამთავრების რიცხვი</label>
               <div class="inputComponent date">
-                <input type="date" autocomplete="off" id="endDate" value="" required>
+                <input type="date" autocomplete="off" id="schoolEndDate" data-outputContainerId="educationOut-0" value="" required>
               </div>
             </div>
           </div>
           <div class="withTextArea description">
             <label for="description">აღწერა</label>
-            <textarea id="description" rows="8" cols="80" placeholder="განათლების აღწერა"></textarea>
+            <textarea id="description" rows="8" cols="80" data-outputContainerId="educationOut-0" placeholder="განათლების აღწერა"></textarea>
           </div>
           <div class="line"></div>
         </div>
-        <div>
-          <div class="withOneInput position">
-            <label>სასწავლებელი</label>
-            <div class="inputComponent">
-              <input type="text" autocomplete="off" id="school" placeholder="სასწავლებელი" value="">
-              <img src="./images/valid.png" alt="Valid">
-            </div>
-            <p>მინიმუმ 2 სიმბოლო</p>
-          </div>
-          <div class="inlineTwoInput">
-            <div class="separator">
-              <label>ხარისხი</label>
-              <div class="inputComponent">
-                <button class="container">
-                  აირჩიეთ ხარისხი
-                  <img src="./images/downArrow.png" alt="Down arrow">
-                </button>
-                <div class="options">
-                  <h3>საშუალო სკოლის დიპლომი</h3>
-                  <h3>ზოგადსაგანმანათლებლო დიპლომი</h3>
-                  <h3>ბაკალავრი</h3>
-                  <h3>მაგისტრი</h3>
-                  <h3>დოქტორი</h3>
-                  <h3>ასოცირებული ხარისხი</h3>
-                  <h3>სტუდენტი</h3>
-                  <h3>კოლეჯი (ხარისხის გარეშე)</h3>
-                  <h3>სხვა</h3>
-                </div>
-              </div>
-            </div>
-            <div class="separator">
-              <label>დამთავრების რიცხვი</label>
-              <div class="inputComponent date">
-                <input type="date" autocomplete="off" id="endDate" value="" required>
-              </div>
-            </div>
-          </div>
-          <div class="withTextArea description">
-            <label for="description">აღწერა</label>
-            <textarea id="description" rows="8" cols="80" placeholder="განათლების აღწერა"></textarea>
-          </div>
-          <div class="line"></div>
-        </div>
-        <button type="button" class="addMore" id="addMore">სხვა სასწავლებლის დამატება</button>
+        <button type="button" class="addMore" disabled id="addMore">სხვა სასწავლებლის დამატება</button>
         <div class="nextPreviousButtons">
           <button type="button">ᲣᲙᲐᲜ</button>
           <button type="button" class="finish">ᲓᲐᲡᲠᲣᲚᲔᲑᲐ</button>
@@ -114,43 +60,43 @@
     </div>
     <div class="resume">
       <div class="resumeData">
-        <section class="personalInfo">
+        <section class="personalInfo" id="personalInfo">
           <div class="data">
             <div class="nameSurname">
-              <h1>ანზორ</h1>
-              <h1>მუმლაძე</h1>
+              <h1 id="nameOutput"></h1>
+              <h1 id="surnameOutput"></h1>
             </div>
             <div class="contactData">
               <img src="./images/email.png" alt="Email icon">
-              <a href="#">anzor666@gmail.com</a>
+              <a href="#" id="emailOutput"></a>
             </div>
             <div class="contactData">
               <img src="./images/phone.png" alt="Phone icon">
-              <a href="#">+995 597 63 45 16</a>
+              <a href="#" id="phoneNumberOutput"></a>
             </div>
             <div class="aboutMePlace">
               <h2>ᲩᲔᲛ ᲨᲔᲡᲐᲮᲔᲑ</h2>
-              <p>ძალიან მიყვარს დიზაინის კეთება. დილით ადრე რომ ავდგები გამამხნევებელი ვარჯიშების მაგიერ დიზაინს ვაკეთებ.</p>
+              <p id="aboutMeOutput"></p>
             </div>
           </div>
           <div class="ImageSection">
-            <img src="https://www.pngitem.com/pimgs/m/208-2080024_man-in-suit-running-hd-png-download.png" alt="Profile image">
+            <img id="personalImageOutput" src="" alt="Profile image">
           </div>
         </section>
-        <section class="experience">
-          <h2>ᲒᲐᲛᲝᲪᲓᲘᲚᲔᲑᲐ</h2>
-          <h3>React Native Developer, Microsoft</h3>
-          <h4>2022/09/23 - 2022/12/23</h4>
-          <p>ძალიან მიყვარს დიზაინის კეთება. დილით ადრე რომ ავდგები გამამხნევებელი ვარჯიშების მაგიერ დიზაინს ვაკეთებ.</p>
-        </section>
-        <section class="experience">
+        <!-- <section class="experience" id="educationOut-0">
           <h2>ᲒᲐᲜᲐᲗᲚᲔᲑᲐ</h2>
           <h3>წმ. ანდრიას საპატრიარქოს სასწავლებელი, სტუდენტი</h3>
           <h4>2020-09-09</h4>
           <p>ვსწავლობდი გულმოდგინეთ. მყავდა ფრიადები. რაც შემეძლო — ვქენი. კომპიუტერები მიყვარდა. ვიჯექი ჩემთვის, ვაკაკუნებდი ამ კლავიშებზე. მეუნებოდნენ — დაჯექი, წაიკითხე რამე, რას აკაკუნებ, დრო მოვა და ჩაგიკაკუნებსო. აჰა, მოვიდა დრო და ვერა ვარ დეველოპერი?</p>
-        </section>
+        </section> -->
         <img src="./images/resumeLogo.png" class="resumeLogo" alt="Resume logo">
       </div>
     </div>
+
+    <!-- scripts -->
+    <script src="./scripts/functions.js"></script>
+    <script src="./scripts/main.js"></script>
+    <script src="./scripts/education.js"></script>
+    <!-- End of scripts -->
   </body>
 </html>

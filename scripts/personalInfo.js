@@ -63,7 +63,7 @@ fileInput.addEventListener("change",(e)=>{
   if(!image.type.startsWith("image/")){
     validInvalid.src = "./images/invalid.png";
     validInvalid.style.display = "block";
-    validInvalid.alt="Ivnalid";
+    validInvalid.alt="Invalid";
     imageDestination.parentElement.style.visibility = "hidden";
     delete data["data"][pageId][id];
     return;
@@ -84,7 +84,6 @@ fileInput.addEventListener("change",(e)=>{
   const imageLoader = new FileReader();
   imageLoader.readAsDataURL(image);
   imageLoader.addEventListener("load",(e)=>{
-    console.log(e.currentTarget);
     imageDestination.src = e.currentTarget.result;
     //under 3mb images
     data["data"][pageId][id] = e.currentTarget.result;
