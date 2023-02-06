@@ -1,14 +1,15 @@
+"use strict";
 const pageId = "personalInfo";
 const inputs = document.querySelectorAll("input[type='text']");
 const textarea = document.querySelector("textarea");
 const fileInput = document.querySelector("#personalImage");
 
-for(input of inputs) input.addEventListener("keyup", (e)=>{
+for(const input of inputs) input.addEventListener("keyup", (e)=>{
   const outputPage = document.querySelector(`#${pageId}`);
   const data = getDataFromLocalStorage();
 
   const target = e.currentTarget;
-  updateInputAndValidate(target);
+  updateOutputAndValidate(target);
   if(target.id === "email" || target.id == "phoneNumber"){
     const outputDestination = document.querySelector(`#${target.id}Output`);
     outputDestination.parentElement.style.visibility = "visible";
@@ -36,10 +37,13 @@ textarea.addEventListener("keyup",(e)=>{
   const outputDestination = document.querySelector(`#${target.id}Output`);
   outputDestination.innerText = target.value;
   outputDestination.parentElement.style.visibility = "visible";
+  target.classList = [];
+  target.classList.add("valid");
 
   data["data"][pageId][target.id] = target.value;
   if(target.value == ""){
     delete data["data"][pageId][target.id];
+    target.classList = [];
     outputDestination.parentElement.style.visibility = "hidden";
   }
   setDataInLocalStorage(data);
@@ -59,7 +63,7 @@ fileInput.addEventListener("change",(e)=>{
   if(!image.type.startsWith("image/")){
     validInvalid.src = "./images/invalid.png";
     validInvalid.style.display = "block";
-    validInvalid.alt="Inalid";
+    validInvalid.alt="Ivnalid";
     imageDestination.parentElement.style.visibility = "hidden";
     delete data["data"][pageId][id];
     return;

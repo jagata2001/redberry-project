@@ -18,40 +18,40 @@
           <h1>ᲒᲐᲛᲝᲪᲓᲘᲚᲔᲑᲐ</h1>
           <p>2/3</p>
         </div>
-        <div>
+        <div id="experience-0">
           <div class="withOneInput position">
-            <label>თანამდებობა</label>
+            <label for="position">თანამდებობა</label>
             <div class="inputComponent">
-              <input type="text" autocomplete="off" id="position" placeholder="დეველოპერი, დიზაინერი, ა.შ." value="">
+              <input type="text" autocomplete="off" id="position" data-outputContainerId="experienceOut-0" placeholder="დეველოპერი, დიზაინერი, ა.შ." value="">
               <img src="./images/valid.png" alt="Valid">
             </div>
             <p>მინიმუმ 2 სიმბოლო</p>
           </div>
           <div class="withOneInput employer">
-            <label>დამსაქმებელი</label>
+            <label for="employer">დამსაქმებელი</label>
             <div class="inputComponent">
-              <input type="text" autocomplete="off" id="employer" placeholder="დამსაქმებელი" value="">
+              <input type="text" autocomplete="off" id="employer" data-outputContainerId="experienceOut-0" placeholder="დამსაქმებელი" value="">
               <img src="./images/valid.png" alt="Valid">
             </div>
             <p>მინიმუმ 2 სიმბოლო</p>
           </div>
           <div class="inlineTwoInput">
             <div class="separator">
-              <label>დაწყების რიცხვი</label>
+              <label for="startDate">დაწყების რიცხვი</label>
               <div class="inputComponent date">
-                <input type="date" autocomplete="off" id="startDate" value="">
+                <input type="date" autocomplete="off" id="startDate" data-outputContainerId="experienceOut-0" value="">
               </div>
             </div>
             <div class="separator">
-              <label>დამთავრების რიცხვი</label>
+              <label for="endDate">დამთავრების რიცხვი</label>
               <div class="inputComponent date">
-                <input type="date" autocomplete="off" id="endDate" value="">
+                <input type="date" autocomplete="off" id="endDate" data-outputContainerId="experienceOut-0" value="">
               </div>
             </div>
           </div>
           <div class="withTextArea description">
             <label for="description">აღწერა</label>
-            <textarea id="description" rows="8" cols="80" placeholder="როლი თანამდებობაზე და ზოგადი აღწერა"></textarea>
+            <textarea id="description" data-outputContainerId="experienceOut-0" rows="8" cols="80" placeholder="როლი თანამდებობაზე და ზოგადი აღწერა"></textarea>
           </div>
           <div class="line"></div>
         </div>
@@ -64,37 +64,37 @@
     </div>
     <div class="resume">
       <div class="resumeData">
-        <section class="personalInfo">
+        <section class="personalInfo" id="personalInfo">
           <div class="data">
             <div class="nameSurname">
-              <h1>ანზორ</h1>
-              <h1>მუმლაძე</h1>
+              <h1 id="nameOutput"></h1>
+              <h1 id="surnameOutput"></h1>
             </div>
             <div class="contactData">
               <img src="./images/email.png" alt="Email icon">
-              <a href="#">anzor666@gmail.com</a>
+              <a href="#" id="emailOutput"></a>
             </div>
             <div class="contactData">
               <img src="./images/phone.png" alt="Phone icon">
-              <a href="#">+995 597 63 45 16</a>
+              <a href="#" id="phoneNumberOutput"></a>
             </div>
             <div class="aboutMePlace">
               <h2>ᲩᲔᲛ ᲨᲔᲡᲐᲮᲔᲑ</h2>
-              <p>ძალიან მიყვარს დიზაინის კეთება. დილით ადრე რომ ავდგები გამამხნევებელი ვარჯიშების მაგიერ დიზაინს ვაკეთებ.</p>
+              <p id="aboutMeOutput"></p>
             </div>
           </div>
           <div class="ImageSection">
-            <img src="https://www.pngitem.com/pimgs/m/208-2080024_man-in-suit-running-hd-png-download.png" alt="Profile image">
+            <img id="personalImageOutput" src="" alt="Profile image">
           </div>
-        </section>
-        <section class="experience">
-          <h2>ᲒᲐᲛᲝᲪᲓᲘᲚᲔᲑᲐ</h2>
-          <h3>React Native Developer, Microsoft</h3>
-          <h4>2022/09/23 - 2022/12/23</h4>
-          <p>ძალიან მიყვარს დიზაინის კეთება. დილით ადრე რომ ავდგები გამამხნევებელი ვარჯიშების მაგიერ დიზაინს ვაკეთებ.</p>
         </section>
         <img src="./images/resumeLogo.png" class="resumeLogo" alt="Resume logo">
       </div>
     </div>
+
+    <!-- scripts -->
+    <script src="./scripts/functions.js"></script>
+    <script src="./scripts/main.js"></script>
+    <script src="./scripts/experience.js"></script>
+    <!-- End of scripts -->
   </body>
 </html>

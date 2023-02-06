@@ -1,3 +1,4 @@
+"use strict";
 const dataPatern = {
   "data":{
     "personalInfo":{},
@@ -17,6 +18,6 @@ window.addEventListener("load",()=>{
   const pageId = getPageIdBasedOnUrl();
   const data = getDataFromLocalStorage();
   console.log(data);
-  if(Object.keys(data["data"][pageId]).length == 0) document.querySelector(`#${pageId}`).style.visibility = "hidden";
+  if(Object.keys(data["data"][pageId]).length == 0 && pageId === "personalInfo") document.querySelector(`#${pageId}`).style.visibility = "hidden";
   restoreDataFromLocalStorage();
 });
