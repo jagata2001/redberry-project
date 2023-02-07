@@ -97,7 +97,7 @@ fileInput.addEventListener("change",(e)=>{
   imageLoader.addEventListener("load",(e)=>{
     imageDestination.src = e.currentTarget.result;
     //under 3mb images
-    data["data"][pageId][id] = e.currentTarget.result;
+    data["data"][pageId][id] = {"base64Image":e.currentTarget.result, "name":image.name};
     setDataInLocalStorage(data);
   });
 

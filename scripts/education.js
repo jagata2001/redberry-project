@@ -10,7 +10,9 @@ addMore.addEventListener("click",addMoreExperienceOrEducation.bind(event, "á²’á²
 
 backButton.addEventListener("click",back);
 
-submitButton.addEventListener("click", ()=>{
+submitButton.addEventListener("click", async (e)=>{
+  const target = e.currentTarget;
+  target.disabled = true;
   const data = getDataFromLocalStorage();
   const educationForms = document.querySelectorAll("div[id^='education-']");
   const maxValidObjectsPerForm = 4;
@@ -30,11 +32,24 @@ submitButton.addEventListener("click", ()=>{
       const firstFormLabels = document.querySelectorAll("#education-0 label");
       for(const label of firstFormLabels) label.classList.add("invalidLabel");
     }
+    target.disabled = false;
     return;
   }
 
   if(validQuantity === (filledFormQuantity*maxValidObjectsPerForm) && invalidQuantity === 0){
-    console.log("Submit data");
+    await submitData();
   }
+  target.disabled = false;
 
+});
+
+window.addEventListener("click", (e)=>{
+  let target = e.target;
+  while(true){
+    if(target.tagName === "BODY") break;
+    if(target.id === "degree") return;
+    target = target.parentElement;
+  }
+  const options = document.querySelectorAll("#options");
+  for(const option of options) option.style.display = "none";
 });

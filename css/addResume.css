@@ -219,7 +219,12 @@ body{
   border-radius: 4px;
   cursor: pointer;
   padding: 14px 35px;
+  transition: background 0.4s ease-out;
 }
+.inputSide .nextPreviousButtons button:hover{
+  background-color: #512FAF;
+}
+
 .inputSide .nextPreviousButtons .next{
   margin-left: auto;
 }

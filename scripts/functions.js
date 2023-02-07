@@ -140,6 +140,8 @@ const validateDateTypeInputAndUpdate = (target,compare=false)=>{
     const inputsContainerId = target.getAttribute("data-outputcontainerid").replace("Out","");
     const secondId = target.id === "startDate" ? "endDate" : "startDate";
     const second = document.querySelector(`#${inputsContainerId} #${secondId}`);
+    const secondLabel = document.querySelector(`#${inputsContainerId} label[for='${secondId}']`);
+    secondLabel.classList = []
     updateTextWithSeparator(
           target.id === "startDate" ? target.value : second.value,
           target.id === "endDate" ? target.value : second.value,
@@ -406,7 +408,7 @@ const createNewEducation = ()=>{
   label.setAttribute("for","degree");
   separatorDiv.appendChild(label);
   const componentDiv = document.createElement("div");
-  componentDiv.className = "inputComponent date";
+  componentDiv.className = "inputComponent";
   const button = document.createElement("button");
   button.id = "degree";
   button.className = "container";
@@ -452,6 +454,8 @@ const chooseOption = (pageId,headText,e)=>{
   const outputContainerId = degree.getAttribute("data-outputContainerId");
   const inputsContainerId = outputContainerId.replace("Out","");
   const outputContainer = document.querySelector(`#${outputContainerId}`);
+  const label = document.querySelector(`#${inputsContainerId} label[for='${degree.id}']`);
+  label.classList = [];
 
   if(data["data"][pageId][inputsContainerId] === undefined) data["data"][pageId][inputsContainerId] = {};
   data["data"][pageId][inputsContainerId]["degree"] = target.innerText;
@@ -507,7 +511,7 @@ const restorePersonalInfo = ()=>{
   const pageId = getPageIdBasedOnUrl();
   for(const [elementKey, value] of Object.entries(data["data"]["personalInfo"])){
     const outputDestination = document.querySelector(`#${elementKey}Output`);
-    elementKey === "personalImage" ? outputDestination.src=value : outputDestination.innerText = value;
+    elementKey === "personalImage" ? outputDestination.src=value["base64Image"] : outputDestination.innerText = value;
     if(elementKey === "email" || elementKey == "phoneNumber" ||
         elementKey == "aboutMe" || elementKey === "personalImage") outputDestination.parentElement.style.visibility = "visible";
     if(pageId === "personalInfo"){
@@ -743,4 +747,64 @@ const validateEducationExperienceFormForButton = (form)=>{
 
   }
   return {"valid":validQuantity,"invalid":invalidQuantity};
+};
+
+
+const base64ImageToBlob = async ()=>{
+  const data = getDataFromLocalStorage();
+  const base64Image = data["data"]["personalInfo"]["personalImage"]["base64Image"];
+  const resp = await fetch(base64Image);
+  return await resp.blob();
+};
+/*Variabe options is declared in main.js*/
+const getDegreeId = (degree)=>{
+  for(const option of options){
+    if(option["title"] === degree) return option.id;
+  }
+};
+const convertLocalDataToFormData = async ()=>{
+  const data = getDataFromLocalStorage()["data"];
+  const resp = await fetch(data["personalInfo"]["personalImage"]["base64Image"]);
+  const blob = await resp.blob();
+  const formData = new FormData();
+  formData.append("name",data["personalInfo"]["name"]);
+  formData.append("surname",data["personalInfo"]["surname"]);
+  formData.append("email",data["personalInfo"]["email"]);
+  formData.append("phone_number",data["personalInfo"]["phoneNumber"]);
+  formData.append("image",blob,data["personalInfo"]["personalImage"]["name"]);
+  formData.append("about_me",data["personalInfo"]["aboutMe"] === undefined ? "" : data["personalInfo"]["aboutMe"]);
+
+  let i=0;
+  for(const experience of Object.values(data["experience"])){
+    if(Object.keys(experience).length === 0) continue;
+    formData.append(`experiences[${i}][position]`,experience["position"]);
+    formData.append(`experiences[${i}][employer]`,experience["employer"]);
+    formData.append(`experiences[${i}][start_date]`,experience["startDate"].replaceAll("-","/"));
+    formData.append(`experiences[${i}][due_date]`,experience["endDate"].replaceAll("-","/"));
+    formData.append(`experiences[${i}][description]`,experience["description"]);
+    i++;
+  }
+
+  let j = 0;
+  for(const education of Object.values(data["education"])){
+    if(Object.keys(education).length === 0) continue;
+    formData.append(`educations[${j}][institute]`,education["school"]);
+    formData.append(`educations[${j}][degree_id]`,getDegreeId(education["degree"]));
+    formData.append(`educations[${j}][due_date]`,education["schoolEndDate"].replaceAll("-","/"));
+    formData.append(`educations[${j}][description]`,education["description"]);
+    j++;
+  }
+
+  return formData;
+};
+const submitData = async ()=>{
+  const data = await convertLocalDataToFormData();
+  const resp = await fetch("https://resume.redberryinternship.ge/api/cvs",{
+    "headers": {
+      "Accept": "application/json"
+    },
+    "method":"POST",
+    "body":data
+  });
+
 };
