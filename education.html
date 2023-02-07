@@ -39,7 +39,7 @@
               </div>
             </div>
             <div class="separator">
-              <label for="endDate">დამთავრების რიცხვი</label>
+              <label for="schoolEndDate">დამთავრების რიცხვი</label>
               <div class="inputComponent date">
                 <input type="date" autocomplete="off" id="schoolEndDate" data-outputContainerId="educationOut-0" value="" data-forFirefox="">
                 <img src="./images/dateIcon.png" alt="Date icon" onclick="event.target.previousElementSibling.showPicker()">
@@ -54,8 +54,8 @@
         </div>
         <button type="button" class="addMore" disabled id="addMore">სხვა სასწავლებლის დამატება</button>
         <div class="nextPreviousButtons">
-          <button type="button">ᲣᲙᲐᲜ</button>
-          <button type="button" class="finish">ᲓᲐᲡᲠᲣᲚᲔᲑᲐ</button>
+          <button type="button" id="backButton">ᲣᲙᲐᲜ</button>
+          <button type="button" class="finish" id="submitButton">ᲓᲐᲡᲠᲣᲚᲔᲑᲐ</button>
         </div>
       </div>
     </div>
@@ -84,12 +84,6 @@
             <img id="personalImageOutput" src="" alt="Profile image">
           </div>
         </section>
-        <!-- <section class="experience" id="educationOut-0">
-          <h2>ᲒᲐᲜᲐᲗᲚᲔᲑᲐ</h2>
-          <h3>წმ. ანდრიას საპატრიარქოს სასწავლებელი, სტუდენტი</h3>
-          <h4>2020-09-09</h4>
-          <p>ვსწავლობდი გულმოდგინეთ. მყავდა ფრიადები. რაც შემეძლო — ვქენი. კომპიუტერები მიყვარდა. ვიჯექი ჩემთვის, ვაკაკუნებდი ამ კლავიშებზე. მეუნებოდნენ — დაჯექი, წაიკითხე რამე, რას აკაკუნებ, დრო მოვა და ჩაგიკაკუნებსო. აჰა, მოვიდა დრო და ვერა ვარ დეველოპერი?</p>
-        </section> -->
         <img src="./images/resumeLogo.png" class="resumeLogo" alt="Resume logo">
       </div>
     </div>

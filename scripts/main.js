@@ -9,7 +9,8 @@ const dataPatern = {
     "personalInfo":"personalInfo.html",
     "experience":"experience.html",
     "education":"education.html",
-  }
+  },
+  "resumeFilled":0
 }
 let options = [];
 

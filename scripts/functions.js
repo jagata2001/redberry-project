@@ -194,6 +194,8 @@ const positionEmployerEducationDateFunction = (pageId,headText,e)=>{
   const outputContainerId = e.currentTarget.getAttribute("data-outputContainerId");
   const inputsContainerId = outputContainerId.replace("Out","");
   let outputContainer = document.querySelector(`#${outputContainerId}`);
+  const label = document.querySelector(`#${inputsContainerId} label[for='${target.id}']`);
+  label.classList = [];
   if(data["data"][pageId][inputsContainerId] === undefined) data["data"][pageId][inputsContainerId] = {};
   if(target.value !== "" && outputContainer === null){
     createSectionForEducationOrExperience(outputContainerId,headText);
@@ -500,9 +502,6 @@ const experienceEducationFormEventListenerSetUp = (pageId, headText, formId)=>{
     });
   }
 };
-const triggerClick = (e) =>{
-  console.log(e);
-};
 const restorePersonalInfo = ()=>{
   const data = getDataFromLocalStorage();
   const pageId = getPageIdBasedOnUrl();
@@ -661,4 +660,87 @@ const restoreDataFromLocalStorage = (waitForOptions = true)=>{
     return;
   }
   restoreEducationInfo();
+};
+
+
+const addMoreExperienceOrEducation = (text, pageId)=>{
+  const data = getDataFromLocalStorage();
+  const formId = text === "ᲒᲐᲛᲝᲪᲓᲘᲚᲔᲑᲐ" ? createNewExperience() : createNewEducation();
+  experienceEducationFormEventListenerSetUp(pageId, text, formId);
+  if(data["data"][pageId][formId] === undefined) data["data"][pageId][formId] = {};
+  setDataInLocalStorage(data);
+};
+const back = ()=>{
+  const data = getDataFromLocalStorage();
+  const pages = Object.values(data["pages"]);
+  const pageIds = Object.keys(data["pages"]);
+  const pageId = getPageIdBasedOnUrl();
+  const currendPageId = pageIds.indexOf(pageId);
+  data["resumeFilled"]--;
+  setDataInLocalStorage(data);
+  window.location.href = pages[currendPageId-1];
+};
+const avoidPageSkipping = ()=>{
+  const data = getDataFromLocalStorage();
+  const pageId = getPageIdBasedOnUrl();
+  const validPageId = data["resumeFilled"];
+  const pageIds = Object.keys(data["pages"]);
+  const pages = Object.values(data["pages"]);
+
+  if(validPageId !== pageIds.indexOf(pageId)){
+    window.location.href = pages[validPageId];
+  }
+};
+
+const validateEducationExperienceFormForButton = (form)=>{
+  const data = getDataFromLocalStorage();
+  let validQuantity = 0;
+  let invalidQuantity = 0;
+  if(data["data"][pageId][form.id] === undefined){
+    const labels = form.querySelectorAll(`label`);
+    for(const label of labels) label.classList = [];
+    return {"valid":validQuantity,"invalid":invalidQuantity};
+  }
+  if(Object.keys(data["data"][pageId][form.id]).length === 0){
+    const labels = form.querySelectorAll(`label`);
+    for(const label of labels) label.classList = [];
+    return {"valid":validQuantity,"invalid":invalidQuantity};
+  }
+  const inputs = form.querySelectorAll(`input`);
+  for(const input of inputs){
+      const label = form.querySelector(`label[for='${input.id}']`);
+      label.classList.add("invalidLabel");
+      if(input.className === "valid"){
+        label.classList = [];
+        validQuantity++;
+        continue;
+      }
+      if(input.className === "invalid") invalidQuantity++;
+
+  }
+  const textarea = form.querySelector(`textarea`);
+  const textareaLabel = form.querySelector(`label[for='${textarea.id}']`);
+  textareaLabel.classList.add("invalidLabel");
+  if(textarea.className === "valid"){
+    validQuantity++;
+    textareaLabel.classList = [];
+  }else if(textarea.className === "invalid"){
+    invalidQuantity++;
+  }
+  if(form.id.startsWith("education")){
+    const button = form.querySelector("#degree");
+    const buttonLabel = form.querySelector("label[for='degree']");
+    buttonLabel.classList.add("invalidLabel");
+    if(button.classList.contains("valid")){
+      validQuantity++;
+      buttonLabel.classList = [];
+    }
+    /*
+      don't need increase invalid variable cause this secition's
+      class can't be 'invalid' without "submit" button action
+      invalidQuantity++;
+    */
+
+  }
+  return {"valid":validQuantity,"invalid":invalidQuantity};
 };
