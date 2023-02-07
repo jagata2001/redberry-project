@@ -39,13 +39,15 @@
             <div class="separator">
               <label for="startDate">დაწყების რიცხვი</label>
               <div class="inputComponent date">
-                <input type="date" autocomplete="off" id="startDate" data-outputContainerId="experienceOut-0" value="">
+                <input type="date" autocomplete="off" id="startDate" data-outputContainerId="experienceOut-0" value="" data-forFirefox="">
+                <img src="./images/dateIcon.png" alt="Date icon" onclick="event.target.previousElementSibling.showPicker()">
               </div>
             </div>
             <div class="separator">
               <label for="endDate">დამთავრების რიცხვი</label>
               <div class="inputComponent date">
-                <input type="date" autocomplete="off" id="endDate" data-outputContainerId="experienceOut-0" value="">
+                <input type="date" autocomplete="off" id="endDate" data-outputContainerId="experienceOut-0" value="" data-forFirefox="">
+                <img src="./images/dateIcon.png" alt="Date icon" onclick="event.target.previousElementSibling.showPicker()">
               </div>
             </div>
           </div>

@@ -20,7 +20,7 @@
     padding: 0 16px;
       color: #000000;
 }
-.inputSide .inputFields .date input:invalid::-webkit-datetime-edit{
+.inputSide .inputFields .date input[data-forFirefox=""]{
     color: rgba(0, 0, 0, 0.6);
 }
 .inputSide .inputFields .date input::-webkit-calendar-picker-indicator {
@@ -31,6 +31,17 @@
   width: 24px;
   height: 24px;
   border-width: thin;
+}
+@supports (-moz-appearance:none) {
+    .inputSide .inputFields .date input[data-forFirefox=""] + img{
+      display: block;
+    }
+}
+.inputSide .inputFields .date img{
+  position: absolute;
+  right: 0;
+  margin-right: 21px;
+  display: none;
 }
 
 .inputSide .nextPreviousButtons{

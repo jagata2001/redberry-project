@@ -203,6 +203,7 @@ const positionEmployerEducationDateFunction = (pageId,headText,e)=>{
   if(target.type === "text"){
     updateOutputAndValidate(target);
   }else if(target.type === "date") {
+    target.setAttribute("data-forFirefox",target.value);
     target.id === "schoolEndDate" ? validateDateTypeInputAndUpdate(target) : validateDateTypeInputAndUpdate(target,true)
   }else{
     validateTextareaAndUpdate(target);
@@ -250,7 +251,13 @@ const createSeparatorDiv = (id, labelText, outputContainerId)=>{
   input.type = "date";
   input.id = id;
   input.setAttribute("data-outputcontainerid",outputContainerId);
+  input.setAttribute("data-forFirefox","");
   dateDiv.appendChild(input);
+  const img = document.createElement("img");
+  img.src = "./images/dateIcon.png";
+  img.alt="Date icon";
+  img.onclick = (event)=>{event.target.previousElementSibling.showPicker()};
+  dateDiv.appendChild(img);
   div.appendChild(dateDiv);
   return div;
 };
@@ -442,6 +449,7 @@ const chooseOption = (pageId,headText,e)=>{
   const degree = target.parentElement.parentElement.querySelector("#degree");
   const outputContainerId = degree.getAttribute("data-outputContainerId");
   const inputsContainerId = outputContainerId.replace("Out","");
+  const outputContainer = document.querySelector(`#${outputContainerId}`);
 
   if(data["data"][pageId][inputsContainerId] === undefined) data["data"][pageId][inputsContainerId] = {};
   data["data"][pageId][inputsContainerId]["degree"] = target.innerText;
@@ -454,9 +462,11 @@ const chooseOption = (pageId,headText,e)=>{
     delete data["data"][pageId][inputsContainerId]["degree"];
     degree.classList.remove("valid");
     span.style.color = "";
+    if(Object.keys(data["data"][pageId][inputsContainerId]).length === 0
+        && outputContainer !== null) outputContainer.remove();
   }
-  const outputContainer = document.querySelector(`#${outputContainerId}`);
-  if(outputContainer === null){
+
+  if(outputContainer === null && target.innerText !== "აირჩიეთ ხარისხი"){
     createSectionForEducationOrExperience(outputContainerId,headText);
   }
   target.parentElement.style.display = "";
@@ -464,7 +474,7 @@ const chooseOption = (pageId,headText,e)=>{
   const school = document.querySelector(`#${inputsContainerId} #school`);
   updateTextWithSeparator(
         school.value,
-        target.innerText,
+        target.innerText === "აირჩიეთ ხარისხი" ? "" : target.innerText,
         outputContainerId,
         "h3",//destinationTag
         ", "
@@ -489,6 +499,9 @@ const experienceEducationFormEventListenerSetUp = (pageId, headText, formId)=>{
       options.style.display = options.style.display === "block" ? "" : "block";
     });
   }
+};
+const triggerClick = (e) =>{
+  console.log(e);
 };
 const restorePersonalInfo = ()=>{
   const data = getDataFromLocalStorage();
@@ -562,7 +575,8 @@ const restoreExperienceInfo = ()=>{
           if(input.type === "text"){
             updateOutputAndValidate(input);
           }else if(input.type === "date") {
-            validateDateTypeInputAndUpdate(input,true)
+            validateDateTypeInputAndUpdate(input,true);
+            input.setAttribute("data-forFirefox",input.value);
           }else{
             validateTextareaAndUpdate(input);
           }
@@ -621,7 +635,8 @@ const restoreEducationInfo = ()=>{
           if(input.type === "text"){
             updateOutputAndValidate(input);
           }else if(input.type === "date") {
-            validateDateTypeInputAndUpdate(input)
+            validateDateTypeInputAndUpdate(input);
+            input.setAttribute("data-forFirefox",input.value);
           }else{
             validateTextareaAndUpdate(input);
           }
@@ -642,7 +657,7 @@ const restoreDataFromLocalStorage = (waitForOptions = true)=>{
         restoreEducationInfo();
         clearInterval(checkIfOptionsLoaded);
       }
-    },200);
+    },50);
     return;
   }
   restoreEducationInfo();
