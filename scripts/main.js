@@ -12,21 +12,16 @@ const dataPatern = {
   },
   "resumeFilled":0
 }
-let options = [];
-
-if(window.localStorage.getItem("data") === null) setDataInLocalStorage(dataPatern);
+const options = [];
+if(window.localStorage.getItem("data") === null && getPageIdBasedOnUrl() !== "resume") setDataInLocalStorage(dataPatern);
 
 window.addEventListener("load",()=>{
   const pageId = getPageIdBasedOnUrl();
   const data = getDataFromLocalStorage();
-  console.log(data);
-  if(Object.keys(data["data"][pageId]).length == 0 && pageId === "personalInfo") document.querySelector(`#${pageId}`).style.visibility = "hidden";
-  restoreDataFromLocalStorage();
+  if(pageId === "personalInfo")
+      if(Object.keys(data["data"][pageId]).length == 0) document.querySelector(`#${pageId}`).style.visibility = "hidden";
+  restoreDataFromLocalStorage(pageId === "resume" ? "resumeData" : "data");
 });
-
-const loadOptions = async ()=>{
-
-};
 
 window.addEventListener("load", async ()=>{
   const pageId = getPageIdBasedOnUrl();
@@ -37,11 +32,18 @@ window.addEventListener("load", async ()=>{
       }
     });
     if(resp.status === 200){
-      options = await resp.json();
+      const respData = await resp.json();
+      for(const option of respData) options.push(option);
       const optionsDiv = createOptions();
       const inputComponent = document.querySelector("#education-0 #degree").parentElement;
       inputComponent.appendChild(optionsDiv);
       experienceEducationFormEventListenerSetUp(pageId, "ᲒᲐᲜᲐᲗᲚᲔᲑᲐ");
     }
   }
+});
+
+document.querySelector(".startPointButton").addEventListener("click",()=>{
+  localStorage.removeItem("data");
+  localStorage.removeItem("resumeData");
+  window.location.href = "index.html";
 });

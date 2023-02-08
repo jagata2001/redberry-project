@@ -1,0 +1,10 @@
+body{
+  justify-content: unset;
+}
+.resume{
+  margin: 45px auto;
+  border: 1px solid #000000;
+}
+.startPointButton{
+  position: absolute;
+}

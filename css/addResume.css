@@ -395,3 +395,34 @@ body{
   color: #FFFFFF;
   background-color: #62A1EB;
 }
+
+.message{
+  width: 427px;
+  height: 167px;
+  position: absolute;
+  top:0;
+  right: 0;
+  background-color: #FFFFFF;
+  border-radius: 8px;
+  border: 1px solid #E4E4E4;
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.25);
+  margin-top: 45px;
+  margin-right: 60px;
+  z-index: 10;
+}
+.message h3{
+  font-family: 'Helvetica Neue Medium';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 43px;
+  color: #1A1A1A;
+  padding: 0 30px;
+  margin-bottom: 40px;
+  vertical-align: center;
+}
+.message img{
+  margin-top: 14px;
+  margin-left: calc(100% - 28px);
+  cursor: pointer;
+}

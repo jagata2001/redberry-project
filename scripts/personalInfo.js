@@ -1,5 +1,5 @@
 "use strict";
-// avoidPageSkipping();
+avoidPageSkipping();
 
 const pageId = "personalInfo";
 const inputs = document.querySelectorAll("input[type='text']");

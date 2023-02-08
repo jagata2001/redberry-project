@@ -17,7 +17,7 @@ const validatePhoneNumber = (text)=>{
 };
 
 const validateLength = (text)=>{
-  if (text.length>=2) return true;
+  if (text.replaceAll(" ","").length>=2) return true;
   return false;
 };
 
@@ -42,12 +42,12 @@ const getPageIdBasedOnUrl = ()=>{
   return page.split(".")[0];
 };
 
-const getDataFromLocalStorage =()=>{
-  return JSON.parse(window.localStorage.getItem("data"));
+const getDataFromLocalStorage = (objectKey = "data")=>{
+  return JSON.parse(window.localStorage.getItem(objectKey));
 };
 
-const setDataInLocalStorage = (data)=>{
-  return window.localStorage.setItem("data",JSON.stringify(data));
+const setDataInLocalStorage = (data,objectKey = "data")=>{
+  return window.localStorage.setItem(objectKey,JSON.stringify(data));
 };
 
 const updateTextWithSeparator = (firstValue, secondValue, containerId, destinationTag, separatorValue)=>{
@@ -123,9 +123,14 @@ const createSectionForEducationOrExperience = (containerId,headText)=>{
   const section = document.createElement("section");
   section.className = "experience";
   section.id = containerId;
-  const h2 = document.createElement("h2");
-  h2.innerText = headText;
-  section.appendChild(h2);
+  const quantity = headText === "ᲒᲐᲛᲝᲪᲓᲘᲚᲔᲑᲐ" ?
+          document.querySelectorAll("section[id^=experienceOut]").length :
+          document.querySelectorAll("section[id^=educationOut]").length;
+  if(quantity === 0){
+    const h2 = document.createElement("h2");
+    h2.innerText = headText;
+    section.appendChild(h2);
+  }
   const h3 = document.createElement("h3");
   section.appendChild(h3);
   const h4 = document.createElement("h4");
@@ -506,8 +511,8 @@ const experienceEducationFormEventListenerSetUp = (pageId, headText, formId)=>{
     });
   }
 };
-const restorePersonalInfo = ()=>{
-  const data = getDataFromLocalStorage();
+const restorePersonalInfo = (objectKey = "data")=>{
+  const data = getDataFromLocalStorage(objectKey);
   const pageId = getPageIdBasedOnUrl();
   for(const [elementKey, value] of Object.entries(data["data"]["personalInfo"])){
     const outputDestination = document.querySelector(`#${elementKey}Output`);
@@ -533,8 +538,8 @@ const restorePersonalInfo = ()=>{
   }
 };
 
-const restoreExperienceInfo = ()=>{
-  const data = getDataFromLocalStorage();
+const restoreExperienceInfo = (objectKey = "data")=>{
+  const data = getDataFromLocalStorage(objectKey);
   const pageId = getPageIdBasedOnUrl();
   for(const [inputsContainerId, inputsData] of Object.entries(data["data"]["experience"])){
 
@@ -588,8 +593,8 @@ const restoreExperienceInfo = ()=>{
   }
 };
 
-const restoreEducationInfo = ()=>{
-  const data = getDataFromLocalStorage();
+const restoreEducationInfo = (objectKey = "data")=>{
+  const data = getDataFromLocalStorage(objectKey);
   const pageId = getPageIdBasedOnUrl();
   for(const [inputsContainerId, inputsData] of Object.entries(data["data"]["education"])){
     const outputContainerId = inputsContainerId.replace("-","Out-");
@@ -648,22 +653,22 @@ const restoreEducationInfo = ()=>{
   }
 };
 let i = 0;
-const restoreDataFromLocalStorage = (waitForOptions = true)=>{
-  restorePersonalInfo();
-  restoreExperienceInfo();
-  const pageId = getPageIdBasedOnUrl();
-    if(pageId === "education"){
+const restoreDataFromLocalStorage = (objectKey)=>{
+  restorePersonalInfo(objectKey);
+  restoreExperienceInfo(objectKey);
+  const pageId = getPageIdBasedOnUrl(objectKey);
+  if(pageId === "education"){
     const checkIfOptionsLoaded = setInterval((e)=>{
       if(options.length>0){
         const addMore = document.querySelector("#addMore");
         addMore.disabled = false;
-        restoreEducationInfo();
+        restoreEducationInfo(objectKey);
         clearInterval(checkIfOptionsLoaded);
       }
     },50);
     return;
   }
-  restoreEducationInfo();
+  restoreEducationInfo(objectKey);
 };
 
 
@@ -740,7 +745,7 @@ const validateEducationExperienceFormForButton = (form)=>{
       buttonLabel.classList = [];
     }
     /*
-      don't need increase invalid variable cause this secition's
+      don't need increase invalid variable cause this section's
       class can't be 'invalid' without "submit" button action
       invalidQuantity++;
     */
@@ -770,7 +775,7 @@ const convertLocalDataToFormData = async ()=>{
   formData.append("name",data["personalInfo"]["name"]);
   formData.append("surname",data["personalInfo"]["surname"]);
   formData.append("email",data["personalInfo"]["email"]);
-  formData.append("phone_number",data["personalInfo"]["phoneNumber"]);
+  formData.append("phone_number",data["personalInfo"]["phoneNumber"].replaceAll(" ",""));
   formData.append("image",blob,data["personalInfo"]["personalImage"]["name"]);
   formData.append("about_me",data["personalInfo"]["aboutMe"] === undefined ? "" : data["personalInfo"]["aboutMe"]);
 
@@ -798,13 +803,36 @@ const convertLocalDataToFormData = async ()=>{
   return formData;
 };
 const submitData = async ()=>{
-  const data = await convertLocalDataToFormData();
-  const resp = await fetch("https://resume.redberryinternship.ge/api/cvs",{
-    "headers": {
-      "Accept": "application/json"
-    },
-    "method":"POST",
-    "body":data
-  });
+  const message = document.querySelector("#message");
+  message.style.display = "none";
+  try{
+    const data = getDataFromLocalStorage();
+    const requestBody = await convertLocalDataToFormData();
+    const resp = await fetch("https://resume.redberryinternship.ge/api/cvs",{
+      "headers": {
+        "Accept": "application/json"
+      },
+      "method":"POST",
+      "body":requestBody
+    });
 
+    if(resp.status === 201){
+      const respData = await resp.json();
+      const resumeData = data["data"];
+      resumeData["personalInfo"]["personalImage"]["base64Image"] = `https://resume.redberryinternship.ge${respData["image"]}`;
+      setDataInLocalStorage({
+        "data":resumeData,
+        "respData":respData
+      },"resumeData");
+      localStorage.removeItem("data");
+      window.location.href = "resume.html";
+    }else{
+      message.style.display = "";
+      const message = await resp.json();
+      console.log(`Status code error: ${resp.status}`,message);
+    }
+  }catch(error){
+    message.style.display = "";
+    console.log(`Something went wrong dugin posting data. ${error}`)
+  }
 };

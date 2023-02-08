@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <title>RedBerry - გამოცდილება</title>
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/addResume.css">
+    <link rel="stylesheet" href="./css/resume.css">
+  </head>
+  <body>
+    <button type="button" name="button" class="startPointButton">
+      <img src="./images/leftArrow.png" alt="Left arrow icon">
+    </button>
+    <div class="resume">
+      <div class="resumeData">
+        <section class="personalInfo" id="personalInfo">
+          <div class="data">
+            <div class="nameSurname">
+              <h1 id="nameOutput"></h1>
+              <h1 id="surnameOutput"></h1>
+            </div>
+            <div class="contactData">
+              <img src="./images/email.png" alt="Email icon">
+              <a href="#" id="emailOutput"></a>
+            </div>
+            <div class="contactData">
+              <img src="./images/phone.png" alt="Phone icon">
+              <a href="#" id="phoneNumberOutput"></a>
+            </div>
+            <div class="aboutMePlace">
+              <h2>ᲩᲔᲛ ᲨᲔᲡᲐᲮᲔᲑ</h2>
+              <p id="aboutMeOutput"></p>
+            </div>
+          </div>
+          <div class="ImageSection">
+            <img id="personalImageOutput" src="" alt="Profile image">
+          </div>
+        </section>
+        <img src="./images/resumeLogo.png" class="resumeLogo" alt="Resume logo">
+      </div>
+    </div>
+    <div class="message">
+      <img src="./images/closeIcon.png" alt="Close icon" id="closeMessage" onclick="event.currentTarget.parentElement.style.display = 'none';">
+      <h3>რეზიუმე წარმატებით გაიგზავნა  🎉</h3>
+    </div>
+    <!-- scripts -->
+    <script src="./scripts/functions.js"></script>
+    <script src="./scripts/resume.js"></script>
+    <script src="./scripts/main.js"></script>
+    <!-- End of scripts -->
+  </body>
+</html>
